@@ -10247,3 +10247,10 @@ body {
 .sb-sidenav-light .sb-sidenav-footer {
   background-color: #e9ecef;
 }
+/*CUSTOM CSS*/
+.w-5{
+  width: 2rem;
+}
+.h-5{
+  height: 2rem;
+}

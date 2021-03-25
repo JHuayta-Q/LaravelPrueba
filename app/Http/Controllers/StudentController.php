@@ -9,33 +9,37 @@ class StudentController extends Controller
 {
     public function index(){
         //execute algorithm
-        $student = Student::all();
+        $student = Student::where('state', 1)->paginate(5);
         //dd($student);
-        return view('admin/index')->with('student', $student); 
+        return view('studentform/index')->with('student', $student); 
     }
-        //create
-        //store
-        //show
-        //edit
 
     public function create(Request $request){
-        
-    }
+        $request->validate([
+            'name' => 'required',
+            'code'=>'required',
+            'career'=>'required',
+        ]);
+        $newstudent = new Student(); 
+        $newstudent->name = $request->name;
+        $newstudent->code = $request->code;
+        $newstudent->career = $request->career;
+        $newstudent->save();
 
-    public function show($id){
-        $student = Student::findOrFail($id);
+        return redirect()->route('studentlist.index')->with('mensaje', 'Estudiante Agregado Correctamente');
     }
-
     public function edit($id){
-        $student = Student::findOrFail($id);
-
+        $student = Student::find($id);
+        return view('studentform/editar')->with('student', $student);
     }
 
     public function update(Request $request, $id){
         $student = Student::find($id);
+        $student->name = $request->name;
+        $student->code = $request->code;
+        $student->career = $request->career;
+        $student->save();
+
+        return redirect()->route('studentlist.index')->with('mensaje1', 'Estudiante Editado Correctamente');
     }
-        
-   public function delete ($id){
-       $delete = Student::findOrFail($id);
-   }
 }

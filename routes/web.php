@@ -3,7 +3,7 @@
 use App\Http\Controllers\CareerController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\StudentController;
-
+use PhpParser\Node\Expr\FuncCall;
 
 /*
 |--------------------------------------------------------------------------
@@ -16,43 +16,26 @@ use App\Http\Controllers\StudentController;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
-
-Route::get('/admin', function(){
-    return view('admin/index');
-});
 /*----------------------------------Student---------------------------------*/
 
 /*Mostrar*/
-Route::get('/show/student', [StudentController::class, 'index']);
+Route::get('/studentlist', [StudentController::class, 'index'])->name('studentlist.index');
 
+/* Mostrar Formulariode Registro */
+Route::get('/studentlist/form', function(){
+    return view('studentform/crear');
+})->name('studentlist.form');
 /*Mostrar por ID*/
-Route::get('/show/student/{student}', [StudentController::class, 'show']);
+//Route::get('/show/student/{student}', [StudentController::class, 'show']);
 
 /*Almacenar*/
-Route::post('/create/student', [StudentController::class, 'create']);
+Route::post('/studentlist', [StudentController::class, 'create'])->name('studentlist.create');
 
 /*Editar por ID*/
-Route::get('/edit/student/{student}', [StudentController::class, 'edit']);
+Route::get('/studentlist/{student}', [StudentController::class, 'edit'])->name('studentlist.edit');
 
 /*Almacenar edicion */
-Route::put('/edit/student/{student}', [StudentController::class, 'update']);
+Route::put('/studentlist/{student}', [StudentController::class, 'update'])->name('studentlist.update');
 
 /* */
-Route::delete('/delete/student/{student}', [StudentController::class, 'delete']);
-
-
-/*-----------------------------------Career---------------------------------*/
-
-/*Mostrar*/
-Route::get('/show/career', [CareerController::class, 'showall']);
-
-/*Mostrar por ID*/
-Route::get('/show/career/{career}', [CareerController::class, 'show']);
-
-Route::get('/template', function(){
-    return view('template/template1');
-});
-
+//Route::delete('/delete/student/{student}', [StudentController::class, 'delete']);
