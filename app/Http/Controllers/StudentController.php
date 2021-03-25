@@ -13,6 +13,9 @@ class StudentController extends Controller
         //dd($student);
         return view('studentform/index')->with('student', $student); 
     }
+    public function formcreate(){
+        return view('studentform/crear');
+    }
 
     public function create(Request $request){
         $request->validate([

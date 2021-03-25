@@ -22,9 +22,8 @@ use PhpParser\Node\Expr\FuncCall;
 Route::get('/studentlist', [StudentController::class, 'index'])->name('studentlist.index');
 
 /* Mostrar Formulariode Registro */
-Route::get('/studentlist/form', function(){
-    return view('studentform/crear');
-})->name('studentlist.form');
+Route::get('/studentlist/form', [StudentController::class, 'formcreate'])->name('studentlist.form');
+
 /*Mostrar por ID*/
 //Route::get('/show/student/{student}', [StudentController::class, 'show']);
 
